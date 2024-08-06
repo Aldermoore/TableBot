@@ -73,7 +73,16 @@ Repo for the final code, 3d-models and assembly instructions for the TableBot ta
 
 ## Files to 3D print
 
-TODO
+All 3d files to build TableBot are available in the TableBot_stl folder. All files should only be printed once, except for the wheels (you might prefer to have two of those).
+
+The wheels have silicone tires, and the folder Silicone_mould includes the necessary files. To produce the mould, print one of each piece. Connect all pieces with a wheel base as the centre, close outer gaps with tape and pour in your silicone mixture. Pull apart the mould and repeat for the second wheel.
+
+The original TableBot is printed primarily in PLA, but a few pieces are printed in PETG for better heat resistance and flexibility. This includes:
+* Arduino_mount.stl
+* RaspberryPi_mount.stl
+* Screen_grid.stl
+
+The Diffuser_Plane.stl file should be printed in a clear material to allow light through it.
 
 ## Assembly instructions
 
