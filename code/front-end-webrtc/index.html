@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>TableBot streaming</title>
+        <!--script src="https://raw.githubusercontent.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js" async></script-->
+        <!--script src="https://rawgit.com/dorukeker/gyronorm.js/master/dist/gyronorm.complete.min.js" async></script-->
+        <script src="grynorm.js"></script>
+        <!-- Javascript required to make the site work-->
+        <script src="main.js"></script>
+
+        <!-- Own files -->
+        <!-- JQuery for control of the mask-image through Javascript -->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>-->
+        <script src="JQuery.js"></script>
+        <!-- Javascript for dragging the filter -->
+        <script defer src="drag.js" type="text/javascript"></script>
+        <!-- Javascript for tracking and setting the interface -->
+        <script defer src="tracking.js" type="text/javascript"></script>
+        <!-- Javascript for animating the interface -->
+        <script defer src="animation.js" type="text/javascript"></script>
+
+        <!-- Javascript for mediating the websocket connection -->
+        <script defer src="websocketClient.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" type="text/css" href="styles.css">
+
+    </head>
+    <body>
+
+        <!-- Video container -->
+        <div id="container" class="container video_area">
+            <img id="background_gif" src="sleeping_animation.gif" onmousedown="return false">
+
+            <video id="remote-video" autoplay="" width="640" height="480">
+                Your browser does not support the video tag.
+            </video>
+            
+            <div id="video_frame"></div>
+            <div id="static_object"></div>
+            <div id="filter">
+                <div id="blur_object"></div>
+            </div>
+            <span id="circle" class="circle"></span>
+        </div>
+
+        <!-- Control container -->
+        <div class="container control_area" id="control_area">
+
+            
+
+            <!-- Potential chat area -->
+            <div id="commands"  class="interaction_bar">
+                <div id="toggle-menu" style="display:none">
+                    <button class="toggle-button" style="width:70px;" onclick="setExperiment('start')">Start</button>
+                    <button class="toggle-button" style="width:70px;" onclick="setExperiment('stop')">End</button>
+                    <br><br>
+                    <button class="toggle-button" style="width:144px;" onclick="setAll()">Set all and close</button>
+                    <br><br>
+        
+                    <h3>View size</h3>
+                    <input id="video_input_wiew_width" type="number" value="1500">
+                    <label for="video_input_wiew_width">View width (px)</label><br>
+                    <input id="video_input_wiew_height" type="number" value="500">
+                    <label for="video_input_wiew_height">View height (px)</label><br>
+        
+                    <h3>Blur settings</h3>
+                    <input type="checkbox" id="input_blur_dynamic">
+                    <label for="input_blur_dynamic">Dynamic filter</label><br>
+                    <input id="input_focus_diameter" type="number" value="19">
+                    <label for="input_focus_diameter">Focus area diameter (%)</label><br>
+                    <input id="input_blur_degree" type="number" value="12">
+                    <label for="input_blur_degree">Blur intensity</label><br>
+
+                    <div id="supportive-settings">
+                        <h3>Video size</h3>
+                        <input id="video_input_width" type="number" value="1500">
+                        <label for="video_input_width">Video width (px)</label><br>
+                        <input id="video_input_height" type="number" value="1200">
+                        <label for="video_input_height">Video height (px)</label><br>      
+
+                        <h3>Animation settings</h3>
+                        <input type="number" id="animation_duration" value="2000">
+                        <label for="animation_duration">Animation duration in ms</label><br><br>
+            
+                        <h3>Video and audio settings</h3>
+                        <div>
+                            <span>Audio:</span>
+                            <label><input type="checkbox" onclick="singleselection('audio_cast', 'cast_mic');" id="cast_mic" name="audio_cast" value="microphone" checked>microphone/other input</label>
+                            <label class="hidden"><input type="checkbox" id="echo_cancellation" name="audio_processing" title="disable any audio processing when casting music">echo cancellation</label>
+                            <!--label><input type="checkbox" onclick="singleselection('audio_cast', 'cast_tab');" id="cast_tab" name="audio_cast" value="system">tab</label-->
+                        </div>
+                        <div>
+                            <span>Video:</span>
+                            <label><input type="checkbox" onclick="singleselection('video_cast', 'cast_camera');" id="cast_camera" name="video_cast" value="camera" checked>camera</label>
+                            <label class="hidden"><input type="checkbox" onclick="singleselection('video_cast', 'cast_screen');" id="cast_screen" name="video_cast" value="screen">screen</label>
+                            <label class="hidden"><input type="checkbox" onclick="singleselection('video_cast', 'cast_window');" id="cast_window" name="video_cast" value="screen">window</label>
+                            <label class="hidden"><input type="checkbox" onclick="singleselection('video_cast', 'cast_application');" id="cast_application" name="video_cast" value="application">application</label>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            <!-- Relevant controls -->
+            <div class="interaction_bar"> 
+                <div>
+                    <button class="call_button" id="start" onclick="start();hideGif();"><img src="graphics/phone-solid.svg" style="height: 20px; width: 20px; cursor: pointer" alt=""></button>
+                    <button class="call_button" id="stop" onclick="stop();showGif();" disabled><img src="graphics/phone-slash-solid.svg" style="height: 20px; width: 20px; cursor: pointer" alt=""></button>
+                </div> 
+                <div id="system_settings">
+                    <button id="menu_button" onclick="displayMenu()">Settings</button>
+
+                    
+                </div>
+                <div  class="hidden">
+                    <p id="note1"><small>NOTE: camera and screen can be casted over HTTPS only in Chrome. For the screen the --enable-usermedia-screen-capturing flag must be set. window or application casting is only supported in Firefox 44 on.</small></p>
+                    <p id="note2"><small>NOTE: except for camera, to enable screen, window or application casting open <i>about:config</i> URL
+                            and set <i>media.getusermedia.screensharing.enabled</i> to <i>true</i>
+                            and permanently add the current domain to the list in <i>media.getusermedia.screensharing.allowed_domains.</i></small>
+                    </p>
+                    <p id="note3"><small>NOTE: if you want to cast music, for better audio quality disable <i>echo-cancellation.</i></small></p>
+                    <p id="note4"><small>NOTE: if you want to cast music, for better audio quality disable <i>echo-cancellation</i>,
+                            and <i>aec</i>, <i>noise-suppression</i>, <i>agc</i> in the browser configuration <i>(about:config).</i></small>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Local video stream -->
+            <div class="interaction_bar">
+                <video id="local-video" autoplay="" width="320" height="240">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            
+
+        </div>
+        <div id="controls"  class="hidden">
+            <button type=button id="pause" onclick="pause();" title="pause or resume local player">Pause/Resume</button>
+            <button type=button id="mute" onclick="mute();" title="mute or unmute remote audio source">Mute/Unmute</button>
+            <button type=button id="fullscreen" onclick="fullscreen();">Fullscreen</button>
+            <button type=button id="record" onclick="start_stop_record();" title="start or stop recording audio/video">Start Recording</button>
+        </div>
+        <fieldset  class="hidden">
+            <legend><b>Remote peer options</b></legend>
+            <div>
+                <span>Video:</span>
+                <label><input type="checkbox" onclick="remote_hw_vcodec_selection();"  id="remote_hw_vcodec" name="remote_hw_vcodec" value="remote_hw_vcodec" title="try to force the use of the hardware codec for both encoding and decoding if enabled and supported">force use of hardware codec for</label>
+                <select id="remote_vformat" name="remote_vformat" onclick="remote_hw_vcodec_format_selection();" title="available resolutions and frame rates at the min., max. and start configured bitrates for adaptive streaming which will be scaled from the base 720p 30fps">
+                    <option value="5">320x240 15 fps</option>
+                    <option value="10">320x240 30 fps</option>
+                    <option value="20">352x288 30 fps</option>
+                    <option value="25">640x480 15 fps</option>
+                    <option value="30">640x480 30 fps</option>
+                    <option value="35">800x480 30 fps</option>
+                    <option value="40">960x720 30 fps</option>
+                    <option value="50">1024x768 30 fps</option>
+                    <option value="55">1280x720 15 fps</option>
+                    <option value="60" selected="selected">1280x720 30 fps, kbps min.800 max.4000 start1200</option>
+                    <option value="63">1280x720 60 fps</option>
+                    <option value="65">1280x768 15 fps</option>
+                    <option value="70">1280x768 30 fps</option>
+                    <option value="75">1536x768 30 fps</option>
+                    <option value="80">1280x960 30 fps</option>
+                    <option value="90">1600x768 30 fps</option>
+                    <option value="95">1640x1232 15 fps</option>
+                    <option value="97">1640x1232 30 fps</option>
+                    <option value="98">1792x896 15 fps</option>
+                    <option value="99">1792x896 30 fps</option>
+                    <option value="100">1920x1080 15 fps</option>
+                    <option value="105">1920x1080 30 fps</option>
+                </select>
+                <p id="note1_"><small>NOTE: if your browser does not support the hardware codec yet, try Firefox with the codec plugin enabled or a recent version of Chrome.</small></p>
+            </div>
+        </fieldset>
+        <div  class="hidden">
+            <details id="record-detail">
+                <summary><b>Recorded Audio/Video stream</b></summary>
+                <div>
+                    <div class="overlayWrapper">
+                        <video id="recorded-video" controls>
+                            Your browser does not support the video tag.
+                        </video>
+                        <p class="overlay">recorded</p>
+                    </div>
+                </div>
+                <div>
+                    <p><small>NOTE: some old Chrome version may generate corrupted video if the audio track is not present as well (use Firefox in this case)</small></p>
+                    <button type=button id="discard" onclick="discard_recording();" title="discard recorded audio/video">Discard</button>
+                    <button type=button id="download" onclick="download();" title="save recorded audio/video">Save as</button>
+                </div>
+            </details>
+        </div><br>
+        <details open  class="hidden">
+            <summary><b>Advanced options</b></summary>
+            <fieldset>
+                <span>Remote Peer/Signalling Server Address: </span><input required type="text" id="signalling_server" value="192.168.1.8:8080" title="<host>:<port>, default address is autodetected"/><br>
+                <span>Optional ICE Servers (STUN/TURN): </span><input type="text" id="ice_servers" value="" title="array of RTCIceServer objects as valid JSON string"/><br>
+                <span>Trickle ICE: </span>
+                <select onclick="trickleice_selection();" id="trickleice" name="trickleice" title="enable trickle ice">
+                    <option value="auto">auto</option>
+                    <option value="true" selected="selected">true</option>
+                    <option value="false">false</option>
+                </select>
+            </fieldset>
+        </details>
+        
+        <div  class="hidden">
+            <details>
+                <summary><b>Data Channels</b></summary>
+                <fieldset id="datachannels" disabled>
+                    <span>message: </span><input type="text" id="datamessage" value="" title="message to send to the remote peer"/>
+                    <button id="datasend" onclick="send_message();">Send</button>
+                    <span>received: </span><input type="text" readonly="readonly" id="datareceived" size="40" title="data received from the remote peer"/><br>
+                    <label><input type="checkbox" onclick="orientationsend_selection();" id="orientationsend" name="orientationsend" title="send device orientation angles when they change">send device orientation angles alpha, beta, gamma</label>
+                    <label><input type="checkbox" onclick="keypresssend_selection();" id="keypresssend" name="keypresssend" title="send keyboard events. Assume US layout. For users with virtual keyboard: put the focus on the 'message' input text item.">send key codes (US layout)</label>
+                    <label><input type="checkbox" onclick="alert('not implemented yet');" id="mousesend" name="mousesend" title="send mouse events">send mouse events</label>
+                </fieldset>
+                <!--fieldset id="localdatachannels">
+                    <button id="datacreate" onclick="create_localdatachannel();">Create</button>
+                    <button id="dataclose" onclick="close_localdatachannel();">Close</button>
+                </fieldset-->
+            </details>
+        </div><br>
+        <br>
+        <a class="hidden" target="_top" href="/">home</a>&nbsp;<a href="/panel" target="_blank" title="change the image settings on-the-fly"></a>
+    </body>
+</html>
