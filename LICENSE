@@ -1,6 +1,8 @@
 MIT License
 
-Copyright (c) 2024 Aldermoore
+Copyright (c) 2024 Maja Dybboe, Johannes Ellemose & Alexander Langagergaard Vastrup
+
+Video4Linux2 & Video4Linux2-loopback are copyright of their respective authors. 
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
