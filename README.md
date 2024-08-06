@@ -78,12 +78,30 @@ TODO
 ## Assembly instructions
 
 TODO
-![1](https://github.com/user-attachments/assets/f1a04ab2-c0fd-46d9-bac8-9b833c6ea7b8)
-
-
 
 ### Assembling the head
-
+Place nuts in assigned slots on the grid
+![1](https://github.com/user-attachments/assets/e8dd08b1-4b12-4c92-a6e7-51da29672f75)
+Attach servo arm using four bolts
+![2](https://github.com/user-attachments/assets/c31fafb4-1327-4bae-b44e-b410e6b5f489)
+![3](https://github.com/user-attachments/assets/4277a65a-7f73-4bb4-a235-5c2f73794715)
+Attach the grid to the back of the screen in eight spots
+![4](https://github.com/user-attachments/assets/453a277d-ee7a-423b-b1f3-0e848a724667)
+Attach holder for Raspberry Pi. Use four small nuts to as spacers to ensure the plastic does not touch the Raspberry Pi directly
+![5](https://github.com/user-attachments/assets/e1a09ffd-bc71-48be-883a-acf077dea1d4)
+![6](https://github.com/user-attachments/assets/0a9a09de-9eb0-41ce-af5a-ee4a97fabe2e)
+Connect the display cable to the screen
+![7](https://github.com/user-attachments/assets/e96ec8f4-7270-48cb-adf9-f819c7f72256)
+![8](https://github.com/user-attachments/assets/60b46c5a-81ae-4687-bd75-8f50ab7d7d67)
+Flip the Raspberry Pi and connect it to the grid using two bolts
+![9](https://github.com/user-attachments/assets/57f9fc4a-e34d-438b-b5ff-4f27b5cbee8a)
+![10](https://github.com/user-attachments/assets/5b1c3d74-b79b-41a2-8859-99f03ece877d)
+Place the screen in the 3d printed frame. Use four bolts to keep it in place
+![11](https://github.com/user-attachments/assets/acbcbf8a-8cd9-4135-92c7-84cea568799a)
+Install the camera by placing it in the assigned space and use two small screws to keep it in place
+![12](https://github.com/user-attachments/assets/2f56756a-72ed-47c7-9139-6df575dc9fdd)
+![13](https://github.com/user-attachments/assets/66d64dc0-5dcd-4441-8421-2cd2b3f73335)
+Leave the head for now as we build the main body
 ### Assembling the base
 
 ## Installation
