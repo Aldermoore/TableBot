@@ -78,6 +78,9 @@ TODO
 ## Assembly instructions
 
 TODO
+![1](https://github.com/user-attachments/assets/f1a04ab2-c0fd-46d9-bac8-9b833c6ea7b8)
+
+
 
 ### Assembling the head
 
