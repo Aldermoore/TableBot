@@ -70,6 +70,12 @@ Repo for the final code, 3d-models and assembly instructions for the TableBot ta
 * Screws and appropriate screwdriver
   
   * Assorted screws for electronics (see pictures)
+![20240806_121625 (1)](https://github.com/user-attachments/assets/29a710d4-76fa-4be3-a853-332eb9219ab3)
+![20240806_121608 (1)](https://github.com/user-attachments/assets/f09776b8-c633-4dcb-aafe-0ef21d773eee)
+![20240806_121558 (1)](https://github.com/user-attachments/assets/00bf6194-1a90-41bc-a275-9ab3e7be34c8)
+![20240806_121548 (1)](https://github.com/user-attachments/assets/f6e8290b-37e2-459c-817f-f2348403bef9)
+![20240806_121401 (1)](https://github.com/user-attachments/assets/d17351a9-b50e-4525-9baa-f9971ab303cd)
+![20240806_100548](https://github.com/user-attachments/assets/6c4bf753-f2de-429a-a320-7b09086c3cf0)
 
 ## Files to 3D print
 
