@@ -104,7 +104,7 @@ Attach servo arm using four bolts
 ![3](https://github.com/user-attachments/assets/4277a65a-7f73-4bb4-a235-5c2f73794715)
 Attach the grid to the back of the screen in eight spots
 ![4](https://github.com/user-attachments/assets/453a277d-ee7a-423b-b1f3-0e848a724667)
-Attach holder for Raspberry Pi. Use four small nuts to as spacers to ensure the plastic does not touch the Raspberry Pi directly
+Attach holder for Raspberry Pi using the screws for the heat sink. Use four small nuts to as spacers to ensure the plastic does not touch the Raspberry Pi directly
 ![5](https://github.com/user-attachments/assets/e1a09ffd-bc71-48be-883a-acf077dea1d4)
 ![6](https://github.com/user-attachments/assets/0a9a09de-9eb0-41ce-af5a-ee4a97fabe2e)
 Connect the display cable to the screen
